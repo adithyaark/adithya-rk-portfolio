@@ -22,10 +22,15 @@ export function ScrollDrift() {
 
     const tick = () => {
       const centre = window.innerHeight / 2;
+      // Narrow screens have proportionally smaller type, so lines travel less.
+      const speed = SPEED * Math.min(1, window.innerWidth / 1280);
       let moving = false;
       for (const item of items) {
         const box = item.section.getBoundingClientRect();
-        const target = item.direction * SPEED * (centre - (box.top + box.height / 2));
+        // Lines rest where their section is centred, or at the very top of the
+        // page for a section (like a short hero) that can never be centred.
+        const restScroll = Math.max(0, box.top + window.scrollY + box.height / 2 - centre);
+        const target = item.direction * speed * (window.scrollY - restScroll);
         item.current += (target - item.current) * EASE;
         if (Math.abs(target - item.current) > 0.1) moving = true;
         else item.current = target;

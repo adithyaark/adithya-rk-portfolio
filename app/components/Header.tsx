@@ -3,22 +3,24 @@
 import { useState } from "react";
 import { RollText } from "./RollText";
 
+// Root-relative so the same header works from /sudoku and other pages.
 const links = [
-  { label: "Capabilities", href: "#capabilities" },
-  { label: "Work", href: "#work" },
-  { label: "Experience", href: "#experience" },
-  { label: "Contact", href: "#contact" },
+  { label: "Capabilities", href: "/#capabilities" },
+  { label: "Work", href: "/#work" },
+  { label: "Experience", href: "/#experience" },
+  { label: "Contact", href: "/#contact" },
+  { label: "Sudoku", href: "/sudoku" },
 ];
 
-export function Header() {
+export function Header({ skipTo = "#intro" }: { skipTo?: string }) {
   const [open, setOpen] = useState(false);
 
   return (
     <>
     <header className="site-header">
-      <a className="skip-link" href="#intro">Skip to content</a>
+      <a className="skip-link" href={skipTo}>Skip to content</a>
       <div className="header-bar">
-        <a className="brand" href="#top" aria-label="ARK, home">
+        <a className="brand" href="/#top" aria-label="ARK, home">
           <RollText text="ARK" />
         </a>
 

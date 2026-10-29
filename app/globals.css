@@ -43,7 +43,8 @@ main { position: relative; overflow-x: clip; }
 
 .section-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; margin-bottom: clamp(56px, 7vw, 110px); }
 .section-head .kicker { margin: 0; }
-.section-head .display { font-size: clamp(44px, 8.4vw, 150px); }
+/* Each big heading is capped at (content width / em-width of its longest line) so no line can overflow a narrow screen. */
+.section-head .display { font-size: min(clamp(44px, 8.4vw, 150px), calc((100vw - 2 * var(--page-pad)) / 8.4)); }
 .section-note { max-width: 420px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
 
 /* ---------- header ---------- */
@@ -76,7 +77,7 @@ a:hover > .roll .roll-letters span, a:focus-visible > .roll .roll-letters span {
 
 /* ---------- hero ---------- */
 .hero { min-height: max(640px, 100svh); display: flex; flex-direction: column; justify-content: flex-end; padding-top: 120px; padding-bottom: clamp(32px, 4vw, 56px); }
-.hero-title { font-size: clamp(40px, 9.2vw, 190px); }
+.hero-title { font-size: min(clamp(40px, 9.2vw, 190px), calc((100vw - 2 * var(--page-pad)) / 10.2)); }
 .hero-bottom { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) auto; gap: 32px; align-items: end; margin-top: clamp(36px, 5vw, 72px); padding-top: 24px; border-top: 1px solid var(--rule); }
 .hero-intro { max-width: 460px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
 .hero-intro strong { color: var(--fg); font-weight: 500; }
@@ -88,7 +89,7 @@ a:hover > .roll .roll-letters span, a:focus-visible > .roll .roll-letters span {
 @keyframes bob { 50% { transform: translateY(5px); } }
 
 /* ---------- intro ---------- */
-.statement { font-size: clamp(30px, 6vw, 118px); }
+.statement { font-size: min(clamp(30px, 6vw, 118px), calc((100vw - 2 * var(--page-pad)) / 15)); }
 .practice { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: clamp(64px, 8vw, 120px) 0 0; padding: 0; list-style: none; border-top: 1px solid var(--rule); }
 .practice li { padding: 22px 24px 0 0; border-right: 1px solid var(--rule); }
 .practice li + li { padding-left: 24px; }
@@ -117,7 +118,7 @@ a:hover > .roll .roll-letters span, a:focus-visible > .roll .roll-letters span {
 
 /* ---------- projects ---------- */
 .project { min-height: max(720px, 100svh); display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(40px, 6vw, 110px); align-items: center; border-top: 1px solid var(--rule); }
-.project-name { font-size: clamp(44px, 5.4vw, 104px); }
+.project-name { font-size: min(clamp(44px, 5.4vw, 104px), calc((100vw - 2 * var(--page-pad)) / 7)); }
 .project-title { margin: 28px 0 16px; max-width: 520px; font-family: var(--display); font-weight: 600; font-size: clamp(20px, 1.8vw, 28px); line-height: 1.2; }
 .project-description { max-width: 500px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 30px 0 0; padding: 0; list-style: none; }
@@ -206,12 +207,12 @@ a:hover > .roll .roll-letters span, a:focus-visible > .roll .roll-letters span {
 @keyframes sign { to { stroke-dashoffset: 0; } }
 @keyframes loader-failsafe { to { opacity: 0; visibility: hidden; } }
 html[data-loaded] .loader:not(.is-leaving) { display: none; }
-html:not([data-loaded]) body { overflow: hidden; }
+html:not([data-loaded]) body:has(.loader) { overflow: hidden; }
 
 /* ---------- contact ---------- */
 .contact { min-height: 100svh; display: flex; flex-direction: column; padding-bottom: 32px; border-top: 1px solid var(--rule); }
 .contact-layout { flex: 1; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(24px, 4vw, 64px); align-items: center; }
-.contact-title { font-size: clamp(44px, 5.9vw, 124px); font-stretch: 104%; }
+.contact-title { font-size: min(clamp(44px, 5.9vw, 124px), calc((100vw - 2 * var(--page-pad)) / 8.3)); font-stretch: 104%; }
 .contact-title .line:nth-child(2) { padding-left: .32em; }
 .contact-title .line:nth-child(3) { padding-left: .08em; }
 .contact-title .line:nth-child(4) { padding-left: .18em; }
@@ -291,6 +292,11 @@ html.dialog-open { overflow: hidden; }
   .knot { min-height: 0; }
   .knot svg { max-height: 70svh; margin: 0 auto; }
   .publication-row { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+}
+
+/* Tall, narrow screens: start the hero under the header instead of pinning it to the bottom of a full-height screen. */
+@media (max-width: 720px), (max-aspect-ratio: 3/4) {
+  .hero { min-height: 0; justify-content: flex-start; padding-top: clamp(104px, 16vw, 150px); padding-bottom: 56px; }
 }
 
 @media (max-width: 720px) {
