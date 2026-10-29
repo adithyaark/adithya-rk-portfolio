@@ -1,0 +1,10 @@
+node_modules/
+.next/
+out/
+.vercel/
+.env*
+!.env.example
+*.log
+pnpm-lock.yaml
+yarn.lock
+*.tsbuildinfo

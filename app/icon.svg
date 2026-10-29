@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- ARK monogram drawn as shapes, since favicons can't load web fonts. -->
+  <rect width="64" height="64" rx="14" fill="#070707"/>
+  <g fill="#f1eee6" fill-rule="evenodd" transform="translate(0.8 0)">
+    <path d="M4 43 L10.5 21 H14.5 L21 43 H16.4 L15.1 38.4 H9.9 L8.6 43 Z M11 34.6 H14 L12.5 28.6 Z"/>
+    <path d="M23 21 H32 C36.5 21 39 23.6 39 27.6 C39 30.6 37.4 32.6 35 33.4 L39.5 43 H34.4 L30.4 34.2 H27.6 V43 H23 Z M27.6 25 V30.4 H31.6 C33.4 30.4 34.4 29.4 34.4 27.7 C34.4 26 33.4 25 31.6 25 Z"/>
+    <path d="M41 21 H45.6 V30.6 L52.6 21 H58 L50.2 31.2 L58.4 43 H52.9 L47.2 34.4 L45.6 36.5 V43 H41 Z"/>
+  </g>
+</svg>
